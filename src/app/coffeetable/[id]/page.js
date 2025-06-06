@@ -41,8 +41,9 @@ export default function CoffeeTableDetails({ params }) {
 
   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
-  const getImageUrl = (image) =>
-    image ? `${imageBaseUrl}${image}` : "/placeholder.jpg";
+  const getImageUrl = (image) => {
+    return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+  };
 
   return (
     <div className="2xl:container mx-auto overflow-x-hidden">
@@ -50,7 +51,7 @@ export default function CoffeeTableDetails({ params }) {
         {/* Background Image */}
         <div className="hidden lg:block absolute top-0 right-0 w-4/12 z-0">
           <Image
-            src={getImageUrl(selectedImage) || "/ctbg.png"}
+            src={getImageUrl(selectedImage)}
             alt="Background"
             width={400}
             height={500}
@@ -63,7 +64,7 @@ export default function CoffeeTableDetails({ params }) {
           <div className="w-full lg:w-8/12 mr-2 ml-2">
             <div className="flex justify-center items-center mt-10 md:mt-12 h-[180px] sm:h-[220px] md:h-[300px]">
               <Image
-                src={getImageUrl(selectedImage) || "/ctbm.png"}
+                src={getImageUrl(selectedImage)}
                 alt="Coffee Table"
                 width={600}
                 height={400}
@@ -106,7 +107,7 @@ export default function CoffeeTableDetails({ params }) {
                   .map((image, index) => (
                     <Image
                       key={index}
-                      src={getImageUrl(image) || "/ct1.png"}
+                      src={getImageUrl(image)}
                       alt={`Product Image ${index + 1}`}
                       width={150}
                       height={150}

@@ -108,14 +108,17 @@ export default function Coffeetable() {
 
   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
-  const getImageUrl = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
+  const getImageUrl = (image) => {
+    return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+  };
+
+  const getImage = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
 
   return (
     <div className="w-full pb-4 h-auto font-sans overflow-x-hidden">
       <div className="2xl:container my-5 mx-auto px-4 sm:px-8">
         <div className="flex flex-wrap mt-3 items-center">
-          <div className="w-full xs:w-7/12 lg:px-10">
-            <div className="hidden lg:block h-[85px]"></div>
+          <div className="w-full xs:w-6/12 sm:w-7/12 lg:px-10 flex flex-col justify-center mb-4 xs:mb-0">
             <motion.div
               className="flex justify-center font-normal md:font-thin text-2xl md:text-4xl tracking-wide sm:tracking-[12px] uppercase"
               initial="offscreen"
@@ -125,7 +128,7 @@ export default function Coffeetable() {
               {categoryData[0]?.name}
             </motion.div>
             <motion.p
-              className="text-center font-normal md:font-thin text-xs sm:text-base md:text-lg mt-4 mb-4 xs:px-2 sm:px-10 md:px-8 lg:px-0 lg:mb-16 tracking-[1.88px] capitalize leading-[1.7]"
+              className="text-center font-normal md:font-thin text-xs sm:text-base md:text-lg mt-2 sm:mt-4 sm:px-2 md:px-8 lg:px-0 tracking-[1.88px] capitalize leading-[1.7]"
               initial="offscreen"
               whileInView="onscreen"
               variants={togVariants}
@@ -134,15 +137,15 @@ export default function Coffeetable() {
             </motion.p>
           </div>
           <motion.div
-            className="w-full xs:w-5/12 flex items-center justify-center lg:justify-end -z-10"
+            className="w-full xs:w-6/12 sm:w-5/12 flex items-center justify-center lg:justify-end -z-10"
             initial="offscreen"
             whileInView="onscreen"
             variants={slideInRight}
           >
-            <div className="relative w-[80%] aspect-[4/3] border-ridge lg:ml-10">
+            <div className="relative w-[80%] xs:w-[100%] sm:w-[80%] aspect-[4/3] border-ridge lg:ml-10">
               <div className="absolute inset-y-0 left-0 z-10 pointer-events-none xs:shadow-[0px_0px_25px_30px_white] md:shadow-[0px_0px_38px_48px_white] lg:shadow-[0px_0px_50px_65px_white]" />
               <Image
-                src={getImageUrl(categoryData[0]?.images[0]) || "/placeholder.jpg"}
+                src={getImage(categoryData[0]?.images[0])}
                 alt="Coffee Table"
                 fill
                 className="object-cover"
@@ -152,7 +155,7 @@ export default function Coffeetable() {
           </motion.div>
         </div>
 
-        <div className="my-4 px-auto grid grid-cols-3 md:grid-cols-6 text-center xl:text-start">
+        <div className="my-5 md:my-4 px-auto grid grid-cols-3 md:grid-cols-6 text-center xl:text-start">
           {Object.entries(filterOptions).map(([label, options]) => (
             <div key={label} className="relative flex justify-center">
               <button
@@ -190,7 +193,7 @@ export default function Coffeetable() {
               >
                 <div className="flex-grow flex items-center justify-center w-[80%] h-[50%]">
                   <Image
-                    src={getImageUrl(product?.images[0]) || "/placeholder.jpg"}
+                    src={getImageUrl(product?.images[0])}
                     alt={product.name}
                     width={300}
                     height={200}

@@ -53,10 +53,10 @@ export default function OurProducts() {
         </motion.p>
       </div>
 
-      <div className="w-1/2 hidden md:block lg:hidden absolute right-0 top-0 lg:w-1/5 flex flex-col mt-5 md:mt-0 mb-5 md:mb-0 sm:px-4 md:px-0">
+      <div className="w-1/2 hidden md:block lg:hidden absolute right-0 top-0 lg:w-1/5 mt-5 md:mt-0 mb-5 md:mb-0 sm:px-4 md:px-0">
         {categories?.length > 2 && (
           <motion.div
-            className="text-center relative mt-4 ml-20 flex justify-center"
+            className="text-center relative mt-8 ml-20 flex justify-center"
             initial="offscreen"
             whileInView="onscreen"
             variants={slideUp}
@@ -80,7 +80,7 @@ export default function OurProducts() {
           </motion.div>
         )}
       </div>
-      <div className="md:mt-14 flex flex-col md:flex-row w-full px-14 md:gap-12 lg:gap-0 px-10 xs:px-6 sm:px-14 lg:px-6">
+      <div className="md:mt-14 flex flex-col md:flex-row w-full md:gap-12 lg:gap-0 px-10 xs:px-6 sm:px-14 lg:px-6">
         <div className="w-full md:w-1/2 lg:w-2/5 flex flex-col xs:flex-row md:flex-col gap-6 lg:gap-10 items-start xl:px-10">
           {categories?.length > 0 && (
             <motion.div
@@ -137,7 +137,7 @@ export default function OurProducts() {
           )}
         </div>
 
-        <div className="w-full block md:hidden relative lg:block lg:w-1/5 flex flex-col mt-3 md:mt-0 mb-5 md:mb-0 md:px-0">
+        <div className="w-full block md:hidden relative lg:block lg:w-1/5 mt-3 md:mt-0 mb-5 md:mb-0 md:px-0">
           {categories?.length > 2 && (
             <motion.div
               className="text-center relative md:mt-20"

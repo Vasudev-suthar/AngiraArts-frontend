@@ -52,7 +52,7 @@ const Page = () => {
 
   return (
     <div className="px-6 py-6 sm:py-10 lg:px-8 bg-white">
-      <Toaster position="bottom-center" reverseOrder={false} />
+      <Toaster position="bottom-center" reverseOrder={false} toastOptions={{ style: { background: '#6c4722', color: '#fff', }, }}/>
 
       <div className="mx-auto max-w-xl text-center text-[#6c4722]">
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">

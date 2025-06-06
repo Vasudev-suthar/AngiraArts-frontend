@@ -5,10 +5,6 @@ import { MyContext } from "./ThemeContext";
 import { fetchDataFromApi } from "@/utils/api";
 
 const ThemeProvider = ({ children }) => {
-  const [isOpenProductModal, setisOpenProductModal] = useState({
-    id: "",
-    open: false,
-  });
   const [productData, setProductData] = useState([]);
 
   const [categoryData, setCategoryData] = useState([]);
@@ -37,17 +33,8 @@ const ThemeProvider = ({ children }) => {
     });
   }, []);
 
-  useEffect(() => {
-    isOpenProductModal.open === true &&
-      fetchDataFromApi(`/api/products/${isOpenProductModal.id}`).then((res) => {
-        setProductData(res);
-      });
-  }, [isOpenProductModal]);
-
 
   const values = {
-    isOpenProductModal,
-    setisOpenProductModal,
     categoryData,
     setCategoryData,
     legfinishData,

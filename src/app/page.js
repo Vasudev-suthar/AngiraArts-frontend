@@ -12,16 +12,16 @@ export default function Home() {
     <div className=" 2xl:container 2xl:mx-auto overflow-x-hidden">
       <Homepage />
       <div id="featured-products" className="hidden md:block">
-      <FeaturedProducts />
+        <FeaturedProducts />
       </div>
       <div id="our-products" className="hidden md:block">
-      <OurProducts />
+        <OurProducts />
       </div>
       <div id="about-us">
-      <AboutUsSection />
+        <AboutUsSection />
       </div>
       <div id="contact-us">
-      <ContactUsSection />
+        <ContactUsSection />
       </div>
     </div>
   );

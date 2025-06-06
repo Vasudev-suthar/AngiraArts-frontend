@@ -38,7 +38,9 @@ export default function DiningTableLegDetail({ params }) {
 
     const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
-    const getImageUrl = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
+    const getImageUrl = (image) => {
+        return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+      };
 
     return (
         <div className="2xl:container mx-auto overflow-x-hidden">
@@ -46,7 +48,7 @@ export default function DiningTableLegDetail({ params }) {
                 {/* Background Image */}
                 <div className="hidden lg:block absolute top-0 right-0 w-1/3">
                     <Image
-                        src={getImageUrl(selectedImage) || "/mtbg.png"}
+                        src={getImageUrl(selectedImage)}
                         alt="Background"
                         width={400}
                         height={600}
@@ -61,7 +63,7 @@ export default function DiningTableLegDetail({ params }) {
                         <div className="flex justify-center items-center mt-12 h-[180px] sm:h-[220px] md:h-[300px]">
                             <div className="relative w-full h-full max-w-[600px]">
                                 <Image
-                                    src={getImageUrl(selectedImage) || "/mtbm.png"}
+                                    src={getImageUrl(selectedImage)}
                                     alt="Metal Leg Big"
                                     fill
                                     className="object-contain"
@@ -88,7 +90,7 @@ export default function DiningTableLegDetail({ params }) {
                                 {product.images.slice(currentSlide, currentSlide + 3).map((image, index) => (
                                     <Image
                                         key={index}
-                                        src={getImageUrl(image) || "/ct1.png"}
+                                        src={getImageUrl(image)}
                                         alt={`Product Image ${index + 1}`}
                                         width={150}
                                         height={150}

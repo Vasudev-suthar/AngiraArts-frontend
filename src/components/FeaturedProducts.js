@@ -39,7 +39,9 @@ export default function FeaturedProducts() {
 
   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
-  const getImageUrl = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
+  const getImageUrl = (image) => {
+    return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+  };
 
   return (
     <div className="block bg-[#F4F3F0] w-full overflow-x-hidden h-[100vh] sm:h-auto pb-9 sm:pb-20 xl:pb-28 2xl:container 2xl:mx-auto">

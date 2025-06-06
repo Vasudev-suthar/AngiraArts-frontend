@@ -41,16 +41,16 @@ export default function StoolDetails({ params }) {
 
   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
-  const getImageUrl = (image) =>
-    image ? `${imageBaseUrl}${image}` : "/placeholder.jpg";
-
+  const getImageUrl = (image) => {
+    return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+  };
   return (
     <div className="2xl:container mx-auto overflow-x-hidden">
       <div className="relative">
         {/* Background Image */}
         <div className="hidden lg:block absolute top-4 right-0 w-5/12">
           <Image
-            src={getImageUrl(selectedImage) || "/stbg.png"}
+            src={getImageUrl(selectedImage)}
             alt="Background"
             width={430}
             height={326}
@@ -65,7 +65,7 @@ export default function StoolDetails({ params }) {
             <div className="flex justify-center items-center mt-12 h-[200px] sm:h-[300px] md:h-[400px]">
               <div className="relative w-full h-full max-w-[530px] aspect-[530/326]">
                 <Image
-                  src={getImageUrl(selectedImage) || "/sbm.png"}
+                  src={getImageUrl(selectedImage)}
                   alt="Stool"
                   fill
                   className="object-contain"
@@ -109,7 +109,7 @@ export default function StoolDetails({ params }) {
                   .map((image, index) => (
                     <Image
                       key={index}
-                      src={getImageUrl(image) || "/placeholder.jpg"}
+                      src={getImageUrl(image)}
                       alt={`Product Image ${index + 1}`}
                       width={150}
                       height={150}
