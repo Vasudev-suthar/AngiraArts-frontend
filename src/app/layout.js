@@ -1,6 +1,13 @@
 
 import "./globals.css";
 import ThemeProvider from "@/context/ThemeProvider";
+import { Raleway } from 'next/font/google';
+
+const raleway = Raleway({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], // ExtraLight
+  variable: '--font-raleway',
+});
 
 export const metadata = {
   title: "ANGIRA ART EXPORTS",
@@ -12,8 +19,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className={`${raleway.variable}`}>
+      <body className="font-raleway">
         <ThemeProvider>
           {children}
         </ThemeProvider>

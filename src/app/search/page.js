@@ -55,7 +55,7 @@ export default function SearchPage() {
         setBaseProducts(res.products); // Update base products for further filtering
         setProducts(res.products);
         setOpenDropdown(null);
-      }) 
+      })
     } else if (value === "all") {
       setFilters({
         topmaterial: "",
@@ -113,8 +113,9 @@ export default function SearchPage() {
 
   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
-  const getImageUrl = (image) =>
-    image ? `${imageBaseUrl}${image}` : "/placeholder.jpg";
+  const getImageUrl = (image) => {
+    return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+  };
 
   return (
     <div className="2xl:container my-5 mx-auto px-4 sm:px-8">

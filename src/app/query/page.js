@@ -109,15 +109,15 @@ export default function QueryPage() {
                 <Toaster position="bottom-center" reverseOrder={false} toastOptions={{ style: { background: '#6c4722', color: '#fff', }, }} />
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-6 sm:mb-12">
-                        <h1 className="text-lg sm:text-3xl font-bold text-[#8F7C6D]">Your Product Query List</h1>
-                        <p className="mt-2 text-gray-600 text-sm sm:text-lg">
+                        <h1 className="text-lg sm:text-3xl font-bold text-[#8F7C6D] tracking-widest">Your Product Query List</h1>
+                        <p className="mt-2 text-gray-600 text-sm sm:text-lg font-semibold tracking-widest">
                             Review your selected items and provide your contact information
                         </p>
                     </div>
 
                     <div className="bg-white shadow overflow-hidden sm:rounded-lg mb-6 sm:mb-8">
                         <div className="px-3 py-3 sm:py-5 sm:px-6 border-b border-gray-200">
-                            <h3 className="text-sm sm:text-lg leading-6 font-medium text-gray-900">
+                            <h3 className="text-sm sm:text-lg leading-6 font-semibold text-gray-900 tracking-widest">
                                 Selected Items ({queryItems.length})
                             </h3>
                         </div>
@@ -133,13 +133,13 @@ export default function QueryPage() {
                                                 objectFit="contain"
                                             />
                                         </div>
-                                        <div className="ml-2 sm:ml-4">
-                                            <h4 className="text-xs xs:text-sm sm:text-lg font-medium text-gray-900">{item.name}</h4>
-                                            <p className="text-xs sm:text-sm text-gray-500">Code : {item.code}</p>
+                                        <div className="ml-2 sm:ml-4 tracking-widest">
+                                            <h4 className="text-xs xs:text-sm sm:text-lg font-semibold text-gray-900">{item.name}</h4>
+                                            <p className="text-xs sm:text-sm text-gray-500 font-semibold">Code : {item.code}</p>
                                         </div>
                                     </div>
-                                    <div className="flex items-center space-x-2 sm:space-x-4">
-                                        <div className="flex items-center border border-gray-300 rounded-md">
+                                    <div className="flex items-center space-x-2 sm:space-x-4 tracking-widest">
+                                        <div className="flex items-center border border-gray-300 rounded-md font-semibold">
                                             <button
                                                 onClick={() => updateQuantity(index, item.quantity - 1)}
                                                 className="px-1 xs:px-2 sm:px-3 sm:py-1 text-gray-600 hover:bg-gray-100"
@@ -159,7 +159,7 @@ export default function QueryPage() {
                                         </div>
                                         <button
                                             onClick={() => removeFromQuery(index)}
-                                            className="text-red-600 hover:text-red-800 text-[10px] xs:text-xs sm:text-sm font-medium"
+                                            className="text-red-600 hover:text-red-800 text-[10px] xs:text-xs sm:text-sm font-semibold"
                                         >
                                             Remove
                                         </button>
@@ -171,14 +171,14 @@ export default function QueryPage() {
 
                     <div className="bg-white shadow overflow-hidden sm:rounded-lg">
                         <div className="px-3 py-3 sm:py-5 sm:px-6 border-b border-gray-200">
-                            <h3 className="text-sm sm:text-lg leading-6 font-medium text-gray-900">
+                            <h3 className="text-sm sm:text-lg leading-6 font-medium text-gray-900 font-semibold tracking-widest">
                                 Contact Information
                             </h3>
                         </div>
-                        <form onSubmit={sendQuery} className="px-4 py-5 sm:p-6">
+                        <form onSubmit={sendQuery} className="px-4 py-5 sm:p-6 tracking-widest">
                             <div className="grid grid-cols-1 gap-y-4 sm:gap-y-6 gap-x-4 sm:grid-cols-6">
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700">
+                                    <label htmlFor="name" className="block text-xs sm:text-sm font-semibold text-gray-700">
                                         Name <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -193,7 +193,7 @@ export default function QueryPage() {
                                 </div>
 
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700">
+                                    <label htmlFor="email" className="block text-xs sm:text-sm font-semibold text-gray-700">
                                         Email <span className="text-red-500">*</span>
                                     </label>
                                     <input
@@ -208,7 +208,7 @@ export default function QueryPage() {
                                 </div>
 
                                 <div className="sm:col-span-3">
-                                    <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-gray-700">
+                                    <label htmlFor="phone" className="block text-xs sm:text-sm font-semibold text-gray-700">
                                         Phone Number
                                     </label>
                                     <input
@@ -222,7 +222,7 @@ export default function QueryPage() {
                                 </div>
 
                                 <div className="sm:col-span-6">
-                                    <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-700">
+                                    <label htmlFor="message" className="block text-xs sm:text-sm font-semibold text-gray-700">
                                         Additional Message
                                     </label>
                                     <textarea
@@ -240,14 +240,14 @@ export default function QueryPage() {
                                 <button
                                     type="button"
                                     onClick={() => router.push('/')}
-                                    className="px-3 sm:px-4 py-2 border border-gray-300 rounded-md shadow-sm text-xs sm:text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8F7C6D]"
+                                    className="px-3 sm:px-4 py-2 border border-gray-300 rounded-md shadow-sm text-xs sm:text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8F7C6D]"
                                 >
                                     Back To Home
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="px-4 sm:px-6 py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-sm font-medium text-white bg-[#8F7C6D] hover:bg-[#6E5D4F] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8F7C6D] disabled:opacity-70 disabled:cursor-not-allowed"
+                                    className="px-4 sm:px-6 py-2 border border-transparent rounded-md shadow-sm text-xs sm:text-sm text-white bg-[#8F7C6D] hover:bg-[#6E5D4F] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#8F7C6D] disabled:opacity-70 disabled:cursor-not-allowed font-semibold"
                                 >
                                     {isSubmitting ? 'Sending...' : 'Send Query'}
                                 </button>

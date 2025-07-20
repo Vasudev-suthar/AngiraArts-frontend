@@ -21,7 +21,7 @@ module.exports = {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        raleway: ["Raleway", "sans-serif"],
+        raleway: ['var(--font-raleway)', 'sans-serif'],
       },
     },
   },

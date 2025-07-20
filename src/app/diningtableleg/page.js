@@ -1,211 +1,228 @@
-"use client"
-import { useContext, useEffect, useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import Link from 'next/link'
-import Image from "next/image";
+import DiningTableLegContent from "@/components/DiningTableLegContent";
 import { fetchDataFromApi } from "@/utils/api";
-import { MyContext } from "@/context/ThemeContext";
-import { motion } from "framer-motion";
-import { togVariants, headVariants, slideInRight } from "@/utils/animation";
 
+export default async function DiningTableleg() {
+  // Fetch all data on the server
+  const categories = await fetchDataFromApi("/api/category/search?name=Dining Table Leg");
+  const productData = await fetchDataFromApi("/api/products/filter?category=Dining Table Leg");
 
-export default function DiningTableleg() {
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
-  const [legFinishData, setLegfinishData] = useState([]);
-  const [legMaterialData, setLegmaterialData] = useState([]);
-  const [filters, setFilters] = useState({
-    legmaterial: "",
-    legfinish: ""
-  });
-
-  const context = useContext(MyContext);
-
-  const toggleDropdown = (label) => {
-    setOpenDropdown(openDropdown === label ? null : label);
-  };
-
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-
-    fetchDataFromApi("/api/category/search?name=Dining Table Leg").then((res) => {
-      setCategoryData(res?.categoryList);
-    });
-  }, [])
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      // Remove empty values from the filters object
-      const cleanedFilters = Object.fromEntries(
-        Object.entries(filters).filter(([_, value]) => value !== "")
-      );
-
-      const queryParams = new URLSearchParams(cleanedFilters).toString();
-      const res = await fetchDataFromApi(`/api/products/filter?category=Dining Table Leg&${queryParams}`);
-      setProducts(res.products);
-    };
-
-    fetchProducts();
-  }, [filters]);
-
-  useEffect(() => {
-    if (context) {
-      setLegfinishData(context.legfinishData || []);
-      setLegmaterialData(context.legmaterialData || []);
-    }
-  }, [context]);
-
-  
-  const handleOptionClick = (label, value) => {
-    if (value === "all") {
-      setFilters({
-        topmaterial: "",
-        legmaterial: "",
-        topfinish: "",
-        legfinish: ""
-      });
-      fetchDataFromApi("/api/products/filter?category=Metal Leg").then((res) => {
-        setProducts(res.products);
-        setOpenDropdown(null);
-
-      })
-    } else {
-      setFilters((prevFilters) => {
-        const updatedFilters = { ...prevFilters, [label]: value };
-
-        // Remove empty values from the filters object
-        Object.keys(updatedFilters).forEach((key) => {
-          if (updatedFilters[key] === "") {
-            delete updatedFilters[key];
-          }
-        });
-
-        return updatedFilters;
-      });
-
-      setOpenDropdown(null); // Close the dropdown
-    }
-  };
-
-
-  const filterOptions = {
-    "Leg Material": legMaterialData,
-    "Leg Finish": legFinishData,
-    "Category": [
-      { _id: "all", name: "Dining Table Leg" }, // Add "All" option
-    ],
-    "Remove Filters": [
-      { _id: "all", name: "All Products" }, // Add "All" option
-    ]
-  };
-
-  const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
-
-  const getImageUrl = (image) => {
-    return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
-  };
-
-  const getImage = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
 
   return (
-    <div className="w-full pb-4 h-auto font-sans overflow-x-hidden">
-      <div className="2xl:container my-5 mx-auto px-4 sm:px-8">
-        <div className="flex flex-wrap mt-3">
-          <div className="w-full xs:w-6/12 sm:w-7/12 flex flex-col justify-center mb-4 xs:mb-0">
-            <motion.div
-              className="flex justify-center font-normal md:font-thin text-xl md:text-4xl tracking-wide lg:tracking-[12px]"
-              initial="offscreen"
-              whileInView="onscreen"
-              variants={headVariants}
-            >
-              {categoryData[0]?.name}
-            </motion.div>
-            <motion.p
-              className="text-center font-normal md:font-thin text-xs sm:text-base md:text-lg mt-2 sm:mt-4 sm:px-2 md:px-8 lg:px-0 tracking-[1.88px] capitalize leading-[1.7]"
-              initial="offscreen"
-              whileInView="onscreen"
-              variants={togVariants}
-            >
-              Explore our extensive collection of metal dining legs, scrupulously crafted to complement a variety of dining tops. Elevate your space with these exquisite leg designs.
-            </motion.p>
-          </div>
-          <motion.div
-            className="w-full xs:w-6/12 sm:w-5/12 flex items-center justify-center lg:justify-end -z-10"
-            initial="offscreen"
-            whileInView="onscreen"
-            variants={slideInRight}
-          >
-            <div className="relative w-[80%] xs:w-[90%] sm:w-[80%] aspect-[4/3] border-ridge lg:ml-10">
-              <div className="absolute inset-y-0 left-0 z-10 pointer-events-none xs:shadow-[0px_0px_25px_30px_white] md:shadow-[0px_0px_38px_48px_white] lg:shadow-[0px_0px_50px_65px_white]" />
-              <Image
-                src={getImage(categoryData[0]?.images[0])}
-                alt="Metal Leg"
-                className="object-cover"
-                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 35vw"
-                width={500}
-                height={500}
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="my-5 md:my-4 px-auto grid grid-cols-2 md:grid-cols-4 text-center">
-          {Object.entries(filterOptions).map(([label, options]) => (
-            <div key={label} className="relative flex justify-center">
-              <button
-                onClick={() => toggleDropdown(label)}
-                className="inline-flex justify-between items-center py-2 focus:outline-none text-xs sm:text-base"
-              >
-                {label} <IoIosArrowDown />
-              </button>
-
-              {openDropdown === label && options.length > 0 && (
-                <div className="flex flex-col items-center absolute mt-10 w-24 z-10 sm:w-44 bg-white border border-gray-200 rounded-md shadow-lg">
-                  {options.map((option) => (
-                    <button
-                      key={option._id}
-                      value={option._id}
-                      onClick={() => handleOptionClick(label.toLowerCase().replace(" ", ""), option._id)}
-                      className="block sm:px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center text-xs sm:text-base"
-                    >
-                      {option.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="grid gap-4 md:gap-6 grid-cols-2">
-          {products?.length > 0 ? (
-            products?.map((product) => (
-              <Link
-                key={product._id}
-                href={`/diningtableleg/${product._id}`}
-                className="flex flex-col items-center justify-center border p-1 md:p-4 h-36 sm:h-44 md:h-56 lg:h-64 xl:h-72 2xl:h-80 text-center hover:scale-105 transition-transform"
-              >
-                <div className="flex-grow flex items-center justify-center w-[70%] h-[50%]">
-                  <Image
-                    src={getImageUrl(product?.images[0])}
-                    alt={product.name}
-                    width={300}
-                    height={200}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </div>
-                <div className="w-full text-xs sm:text-sm md:text-[17px] md:tracking-[2px] md:leading-6">
-                  {product.name}
-                </div>
-              </Link>
-            ))
-          ) : (
-            <p className="text-center col-span-2 mt-10">No products available.</p>
-          )}
-        </div>
-      </div>
-    </div>
+    <DiningTableLegContent 
+      productData={productData?.products || []}
+      categories={categories?.categoryList || []}
+    />
   );
 }
+
+
+
+// "use client"
+// import { useContext, useEffect, useState } from "react";
+// import { IoIosArrowDown } from "react-icons/io";
+// import Link from 'next/link'
+// import Image from "next/image";
+// import { fetchDataFromApi } from "@/utils/api";
+// import { MyContext } from "@/context/ThemeContext";
+// import { motion } from "framer-motion";
+// import { togVariants, headVariants, slideInRight } from "@/utils/animation";
+
+
+// export default function DiningTableleg() {
+//   const [openDropdown, setOpenDropdown] = useState(null);
+//   const [products, setProducts] = useState([]);
+//   const [categoryData, setCategoryData] = useState([]);
+//   const [legFinishData, setLegfinishData] = useState([]);
+//   const [legMaterialData, setLegmaterialData] = useState([]);
+//   const [filters, setFilters] = useState({
+//     legmaterial: "",
+//     legfinish: ""
+//   });
+
+//   const context = useContext(MyContext);
+
+//   const toggleDropdown = (label) => {
+//     setOpenDropdown(openDropdown === label ? null : label);
+//   };
+
+
+//   useEffect(() => {
+//     window.scrollTo(0, 0)
+
+//     fetchDataFromApi("/api/category/search?name=Dining Table Leg").then((res) => {
+//       setCategoryData(res?.categoryList);
+//     });
+//   }, [])
+
+//   useEffect(() => {
+//     const fetchProducts = async () => {
+//       // Remove empty values from the filters object
+//       const cleanedFilters = Object.fromEntries(
+//         Object.entries(filters).filter(([_, value]) => value !== "")
+//       );
+
+//       const queryParams = new URLSearchParams(cleanedFilters).toString();
+//       const res = await fetchDataFromApi(`/api/products/filter?category=Dining Table Leg&${queryParams}`);
+//       setProducts(res.products);
+//     };
+
+//     fetchProducts();
+//   }, [filters]);
+
+//   useEffect(() => {
+//     if (context) {
+//       setLegfinishData(context.legfinishData || []);
+//       setLegmaterialData(context.legmaterialData || []);
+//     }
+//   }, [context]);
+
+  
+//   const handleOptionClick = (label, value) => {
+//     if (value === "all") {
+//       setFilters({
+//         legmaterial: "",
+//         legfinish: ""
+//       });
+//       fetchDataFromApi("/api/products/filter?category=Dining Table Leg").then((res) => {
+//         setProducts(res.products);
+//         setOpenDropdown(null);
+
+//       })
+//     } else {
+//       setFilters((prevFilters) => {
+//         const updatedFilters = { ...prevFilters, [label]: value };
+
+//         // Remove empty values from the filters object
+//         Object.keys(updatedFilters).forEach((key) => {
+//           if (updatedFilters[key] === "") {
+//             delete updatedFilters[key];
+//           }
+//         });
+
+//         return updatedFilters;
+//       });
+
+//       setOpenDropdown(null); // Close the dropdown
+//     }
+//   };
+
+
+//   const filterOptions = {
+//     "Leg Material": legMaterialData,
+//     "Leg Finish": legFinishData,
+//     "Category": [
+//       { _id: "all", name: "Dining Table Leg" }, // Add "All" option
+//     ],
+//     "Remove Filters": [
+//       { _id: "all", name: "All Products" }, // Add "All" option
+//     ]
+//   };
+
+//   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
+
+//   const getImageUrl = (image) => {
+//     return image?.url ? `${imageBaseUrl}${image.url}` : "/placeholder.jpg";
+//   };
+
+//   const getImage = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
+
+//   return (
+//     <div className="w-full pb-4 h-auto font-sans overflow-x-hidden">
+//       <div className="2xl:container my-5 mx-auto px-4 sm:px-8">
+//         <div className="flex flex-wrap mt-3">
+//           <div className="w-full xs:w-6/12 sm:w-7/12 flex flex-col justify-center mb-4 xs:mb-0">
+//             <motion.div
+//               className="flex justify-center font-normal md:font-thin text-xl md:text-4xl tracking-wide lg:tracking-[12px]"
+//               initial="offscreen"
+//               whileInView="onscreen"
+//               variants={headVariants}
+//             >
+//               {categoryData[0]?.name}
+//             </motion.div>
+//             <motion.p
+//               className="text-center font-normal md:font-thin text-xs sm:text-base md:text-lg mt-2 sm:mt-4 sm:px-2 md:px-8 lg:px-0 tracking-[1.88px] capitalize leading-[1.7]"
+//               initial="offscreen"
+//               whileInView="onscreen"
+//               variants={togVariants}
+//             >
+//               Explore our extensive collection of metal dining legs, scrupulously crafted to complement a variety of dining tops. Elevate your space with these exquisite leg designs.
+//             </motion.p>
+//           </div>
+//           <motion.div
+//             className="w-full xs:w-6/12 sm:w-5/12 flex items-center justify-center lg:justify-end -z-10"
+//             initial="offscreen"
+//             whileInView="onscreen"
+//             variants={slideInRight}
+//           >
+//             <div className="relative w-[80%] xs:w-[90%] sm:w-[80%] aspect-[4/3] border-ridge lg:ml-10">
+//               <div className="absolute inset-y-0 left-0 z-10 pointer-events-none xs:shadow-[0px_0px_25px_30px_white] md:shadow-[0px_0px_38px_48px_white] lg:shadow-[0px_0px_50px_65px_white]" />
+//               <Image
+//                 src={getImage(categoryData[0]?.images[0])}
+//                 alt="Metal Leg"
+//                 className="object-cover"
+//                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 35vw"
+//                 width={500}
+//                 height={500}
+//               />
+//             </div>
+//           </motion.div>
+//         </div>
+
+//         <div className="my-5 md:my-4 px-auto grid grid-cols-2 md:grid-cols-4 text-center">
+//           {Object.entries(filterOptions).map(([label, options]) => (
+//             <div key={label} className="relative flex justify-center">
+//               <button
+//                 onClick={() => toggleDropdown(label)}
+//                 className="inline-flex justify-between items-center py-2 focus:outline-none text-xs sm:text-base"
+//               >
+//                 {label} <IoIosArrowDown />
+//               </button>
+
+//               {openDropdown === label && options.length > 0 && (
+//                 <div className="flex flex-col items-center absolute mt-10 w-24 z-10 sm:w-44 bg-white border border-gray-200 rounded-md shadow-lg">
+//                   {options.map((option) => (
+//                     <button
+//                       key={option._id}
+//                       value={option._id}
+//                       onClick={() => handleOptionClick(label.toLowerCase().replace(" ", ""), option._id)}
+//                       className="block sm:px-4 py-2 text-gray-800 hover:bg-gray-200 w-full text-center text-xs sm:text-base"
+//                     >
+//                       {option.name}
+//                     </button>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+//           ))}
+//         </div>
+
+//         <div className="grid gap-4 md:gap-6 grid-cols-2">
+//           {products?.length > 0 ? (
+//             products?.map((product) => (
+//               <Link
+//                 key={product._id}
+//                 href={`/diningtableleg/${product._id}`}
+//                 className="flex flex-col items-center justify-center border p-1 md:p-4 h-36 sm:h-44 md:h-56 lg:h-64 xl:h-72 2xl:h-80 text-center hover:scale-105 transition-transform"
+//               >
+//                 <div className="flex-grow flex items-center justify-center w-[70%] h-[50%]">
+//                   <Image
+//                     src={getImageUrl(product?.images[0])}
+//                     alt={product.name}
+//                     width={300}
+//                     height={200}
+//                     className="max-w-full max-h-full object-contain"
+//                   />
+//                 </div>
+//                 <div className="w-full text-xs sm:text-sm md:text-[17px] md:tracking-[2px] md:leading-6">
+//                   {product.name}
+//                 </div>
+//               </Link>
+//             ))
+//           ) : (
+//             <p className="text-center col-span-2 mt-10">No products available.</p>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }

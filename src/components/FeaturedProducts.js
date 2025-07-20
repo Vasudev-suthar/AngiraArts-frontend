@@ -2,22 +2,14 @@
 
 import Image from "next/image";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import React, { useState, useEffect } from "react";
-import { fetchDataFromApi } from "@/utils/api";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { togVariants, slideIn, titleVariants } from "@/utils/animation";
 
-export default function FeaturedProducts() {
-  const [featuredProducts, setFeaturedProducts] = useState([]);
+export default function FeaturedProducts({ featuredProducts }) {
+
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-
-    fetchDataFromApi(`/api/products/featured`).then((res) => {
-      setFeaturedProducts(res);
-    });
-  }, []);
 
   const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % featuredProducts.length);
@@ -44,10 +36,10 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <div className="block bg-[#F4F3F0] w-full overflow-x-hidden h-[100vh] sm:h-auto pb-9 sm:pb-20 xl:pb-28 2xl:container 2xl:mx-auto">
+    <div className="block bg-[#F4F3F0] w-full overflow-x-hidden h-[100vh] sm:h-auto pb-9 sm:pb-20 xl:pb-28 2xl:container 2xl:mx-auto font-raleway">
       {/* Title */}
-      <div className="flex justify-center items-center bg-white h-10 sm:h-20 mt-8 w-52 sm:w-[480px]">
-        <motion.p className="text-lg sm:text-[27px] font-normal tracking-wider sm:tracking-[7.2px]"
+      <div className="flex justify-center items-center bg-white h-10 sm:h-20 mt-10 w-52 sm:w-[450px] lg:w-[593px]">
+        <motion.p className="text-lg sm:text-[30px] lg:text-[40px] font-light tracking-wider sm:tracking-[7.2px]"
           initial="offscreen"
           whileInView="onscreen"
           variants={slideIn}
@@ -57,9 +49,9 @@ export default function FeaturedProducts() {
       </div>
 
       {/* Description */}
-      <div className="mt-6 px-4 sm:px-8 lg:px-20 w-full md:w-[870px]">
+      <div className="mt-6 px-4 sm:px-8 lg:px-16 w-full lg:w-[870px]">
         <motion.p
-          className="text-xs sm:text-[18px] leading-6 sm:leading-8 tracking-wider capitalize break-words"
+          className="text-xs sm:text-[18px] font-light leading-6 sm:leading-8 tracking-wider capitalize break-words"
           initial="offscreen"
           whileInView="onscreen"
           variants={togVariants}
@@ -74,66 +66,68 @@ export default function FeaturedProducts() {
         <div className="w-full relative">
           <div className="flex justify-between items-center pt-16 sm:pt-10 pb-5">
             {/* Left White Circle with Previous Image */}
-            <div className="justify-center items-center rounded-full bg-white w-[26vw] md:w-[340px] h-[26vw] md:h-[340px] cursor-pointer -ml-[13.5%] hidden lg:flex">
-              <Image
-                src={getImageUrl(featuredProducts[prevIndex]?.images[0])}
-                width={400}
-                height={400}
-                alt="Previous Image"
-                className="max-w-none cursor-pointer hidden lg:block z-20 opacity-50"
-              />
+            <div className="relative justify-center items-center rounded-full bg-white w-[26vw] lg:w-[300px] xl:w-[400px] h-[26vw] lg:h-[300px] xl:h-[400px] cursor-pointer -ml-[13.5%] hidden lg:flex">
+              <div className="absolute w-[110%] h-[100%] aspect-square flex justify-center items-center">
+                <Image
+                  src={getImageUrl(featuredProducts[prevIndex]?.images[0])}
+                  fill
+                  alt="Previous Image"
+                  className="object-contain cursor-pointer max-w-none hidden lg:block z-20 opacity-50"
+                />
+              </div>
             </div>
 
             {/* Main Image with Arrows */}
             <div className="flex justify-between items-center mx-auto md:px-0">
-              <BsArrowLeft
-                className="relative left-3 text-4xl sm:text-5xl bg-[#dddbd6] text-[#766554] rounded-full p-2 opacity-70 cursor-pointer"
-                onClick={prevImage}
-              />
+              <div onClick={prevImage} className="relative flex justify-center items-center right-6 lg:-right-6 rounded-full bg-[#E7E4E1] p-2 cursor-pointer z-10 w-[32px] h-[32px] sm:w-[45px] sm:h-[45px] lg:w-[55px] lg:h-[55px]">
+                <BsArrowLeft
+                  className="text-[26px] text-[#766554]"
+                />
+              </div>
+
 
               <Link href={`/diningtable/${featuredProducts[currentIndex]?._id}`} passHref>
-                <div className="relative flex justify-center items-center rounded-full bg-white w-[55vw] md:w-[500px] h-[55vw] md:h-[500px] cursor-pointer z-10">
-                  <div className="absolute w-[90%] h-[90%] aspect-square">
+                <div className="relative flex justify-center items-center rounded-full bg-white w-[55vw] lg:w-[500px] xl:w-[600px] h-[55vw] lg:h-[500px] xl:h-[600px] cursor-pointer">
+                  <div className="absolute w-[110%] h-[55%] aspect-square">
                     <Image
                       src={getImageUrl(featuredProducts[currentIndex]?.images[0])}
                       fill
                       alt="Current Image"
-                      className="object-contain cursor-pointer z-20"
-                      sizes="(max-width: 768px) 55vw, 500px"
+                      className="object-contain cursor-pointer"
                     />
                   </div>
                 </div>
               </Link>
 
-              <BsArrowRight
-                className="relative right-3 text-4xl sm:text-5xl bg-[#dddbd6] text-[#766554] rounded-full p-2 opacity-70 cursor-pointer"
-                onClick={nextImage}
-              />
+              <div onClick={nextImage} className="relative flex justify-center items-center left-6 lg:-left-6 rounded-full bg-[#E7E4E1] p-2 cursor-pointer z-10 w-[32px] h-[32px] sm:w-[45px] sm:h-[45px] lg:w-[55px] lg:h-[55px]">
+                <BsArrowRight
+                  className="text-[26px] text-[#766554]"
+                />
+              </div>
             </div>
 
             {/* Right White Circle with Next Image */}
-            <div className="justify-center items-center rounded-full bg-white w-[26vw] md:w-[340px] h-[26vw] md:h-[340px] cursor-pointer -mr-[13.5%] hidden lg:flex">
-              <Image
-                src={getImageUrl(featuredProducts[nextIndex]?.images[0])}
-                width={400}
-                height={400}
-                alt="Next Image"
-                className="max-w-none cursor-pointer hidden lg:block z-20 opacity-50"
-              />
+            <div className="relative justify-center items-center rounded-full bg-white w-[26vw] lg:w-[300px] xl:w-[400px] h-[26vw] lg:h-[300px] xl:h-[400px] cursor-pointer -mr-[13.5%] hidden lg:flex">
+              <div className="absolute w-[110%] h-[100%] aspect-square flex justify-center items-center">
+                <Image
+                  src={getImageUrl(featuredProducts[nextIndex]?.images[0])}
+                  fill
+                  alt="Next Image"
+                  className="object-contain cursor-pointer max-w-none hidden lg:block z-20 opacity-50"
+                />
+              </div>
             </div>
           </div>
 
-          <Link href={`/diningdetails/${featuredProducts[currentIndex]?._id}`} passHref>
-            <motion.div className="w-full px-4 self-end flex justify-center mt-2"
-              initial="offscreen"
-              whileInView="onscreen"
-              variants={titleVariants}
-            >
-              <p className="sm:tracking-[10px] text-[#766554] text-center text-sm xs:text-lg sm:text-2xl font-normal">
-                {featuredProducts[currentIndex]?.name || "Product Name"}
-              </p>
-            </motion.div>
-          </Link>
+          <motion.div className="w-full px-4 self-end flex justify-center absolute bottom-6 md:bottom-12"
+            initial="offscreen"
+            whileInView="onscreen"
+            variants={titleVariants}
+          >
+            <p className="tracking-[3px] sm:tracking-[10px] text-center text-xs xs:text-lg sm:text-[24px] lg:text-[32px] font-extralight">
+              {featuredProducts[currentIndex]?.name || "Product Name"}
+            </p>
+          </motion.div>
         </div>
       </div>
     </div>

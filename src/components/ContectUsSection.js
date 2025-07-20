@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function ContactUsSection() {
   return (
-    <footer className="bg-[#F4F3F0] sm:bg-white" id="foot">
+    <footer className="bg-[#F4F3F0] sm:bg-white font-raleway" id="foot">
       {/* Header */}
       <div
-        className="flex justify-center items-center bg-white sm:bg-[#F4F3F0] sm:py-4 h-8 sm:h-[80px] sm:px-8 sm:mt-5 w-28 sm:w-96">
+        className="flex justify-center items-center bg-white sm:bg-[#F4F3F0] sm:py-4 h-8 sm:h-[80px] sm:px-8 sm:mt-5 w-28 sm:w-[308px] lg:w-[408px]">
         <motion.p
-          className="text-sm sm:text-[27px] font-normal tracking-wider sm:tracking-[7.2px]"
+          className="text-sm sm:text-[30px] lg:text-[40px] font-light tracking-wider sm:tracking-[7.2px]"
           initial="offscreen"
           whileInView="onscreen"
           variants={slideIn}
@@ -19,7 +19,7 @@ export default function ContactUsSection() {
       </div>
 
       {/* Address & Email Details */}
-      <div className="flex justify-center flex-wrap mt-4 sm:mt-8">
+      <div className="flex justify-center flex-wrap mt-4 sm:mt-12">
         {/* Address Section */}
         <motion.div
           className="flex flex-col w-5/12 md:w-5/12"
@@ -28,10 +28,10 @@ export default function ContactUsSection() {
           variants={titleVariants}
         >
           <div className="flex items-start mb-4 md:mb-8">
-            <img className="hidden md:flex w-8 lg:w-12 mr-4" src="/location.png" alt="Location Icon" />
+            <img className="hidden md:flex w-8 lg:w-12 mr-8" src="/location.png" alt="Location Icon" />
             <div className="flex-1">
-              <div className="text-[#786756] text-xs sm:text-xl lg:text-2xl font-semibold">Address</div>
-              <div className="text-[#675038] text-[9px] sm:text-sm lg:text-lg mt-1">
+              <div className="text-[#786756] text-xs sm:text-xl lg:text-[28px] font-semibold">Address</div>
+              <div className="text-[#675038] text-[9px] sm:text-[15px] lg:text-[20px] font-normal md:leading-8 md:pr-4 mt-3">
                 E-97 Industrial Area Mandore, Jodhpur 342304, Rajasthan, India
               </div>
             </div>
@@ -46,8 +46,8 @@ export default function ContactUsSection() {
         >
           <div className="flex items-start">
             <div className="flex-1">
-              <div className="text-[#786756] text-xs sm:text-xl lg:text-2xl font-semibold">Branch Address</div>
-              <div className="text-[#675038] text-[9px] sm:text-sm lg:text-lg mt-1">
+              <div className="text-[#786756] text-xs sm:text-xl lg:text-[28px] font-semibold">Branch Address</div>
+              <div className="text-[#675038] text-[9px] sm:text-[15px] lg:text-[20px] font-normal md:leading-8 md:pr-8 mt-3">
                 F-204-205 Industrial Area Mandore, Jodhpur 342304, Rajasthan, India
               </div>
             </div>

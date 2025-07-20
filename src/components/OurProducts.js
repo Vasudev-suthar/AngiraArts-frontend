@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { fetchDataFromApi } from "@/utils/api";
 import { motion } from "framer-motion";
 import {
   togVariants,
@@ -13,27 +11,18 @@ import {
   slideUp,
 } from "@/utils/animation";
 
-export default function OurProducts() {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    fetchDataFromApi("/api/category").then((res) => {
-      setCategories(res.categoryList);
-    });
-  }, []);
+export default function OurProducts({categories}) {
 
   const imageBaseUrl = `${process.env.NEXT_PUBLIC_APP_BASE_URL}/uploads/`;
 
   const getImageUrl = (image) => (image ? `${imageBaseUrl}${image}` : "/placeholder.jpg");
 
-
-
   return (
-    <div className="block relative bg-white pb-8 2xl:container 2xl:mx-auto overflow-x-hidden">
+    <div className="block relative bg-white pb-8 2xl:container 2xl:mx-auto overflow-x-hidden font-raleway">
       {/* Title */}
-      <div className="flex justify-center items-center bg-[#F4F3F0] h-10 sm:h-20 mt-4 md:mt-8 w-44 sm:w-96">
+      <div className="flex justify-center items-center bg-[#F4F3F0] h-10 sm:h-20 mt-4 md:mt-8 w-44 sm:w-[360px] lg:w-[459px]">
         <motion.p
-          className="text-lg sm:text-[27px] font-normal tracking-wider sm:tracking-[7.2px]"
+          className="text-lg sm:text-[30px] lg:text-[40px] font-light tracking-wider sm:tracking-[7.2px] font-light"
           initial="offscreen"
           whileInView="onscreen"
           variants={slideIn}
@@ -42,9 +31,9 @@ export default function OurProducts() {
         </motion.p>
       </div>
 
-      <div className="w-full md:w-[60%] lg:w-4/5 md:ml-8 lg:ml-16 mt-0 md:mt-6 px-10 py-5 xs:px-6 sm:px-14 sm:py-8 md:px-0 md:py-0">
+      <div className="w-full md:w-[60%] lg:w-[840px] md:ml-8 lg:ml-16 mt-0 md:mt-6 px-10 py-5 xs:px-6 sm:px-14 sm:py-8 md:px-0 md:py-0">
         <motion.p
-          className="text-xs sm:text-[18px] leading-6 sm:leading-8 tracking-wider capitalize break-words"
+          className="text-xs sm:text-[18px] leading-6 sm:leading-8 tracking-wider capitalize font-light"
           initial="offscreen"
           whileInView="onscreen"
           variants={togVariants}
@@ -61,7 +50,7 @@ export default function OurProducts() {
             whileInView="onscreen"
             variants={slideUp}
           >
-            <Link href="/chair" className="relative">
+            <Link href="/diningtable" className="relative">
               <Image
                 src={getImageUrl(categories[2]?.images[0])}
                 width="530"
@@ -70,18 +59,18 @@ export default function OurProducts() {
                 alt={categories[2].name}
               />
               <motion.button
-                className="bg-white border border-[#766554] px-2 sm:py-1 md:text-base md:ml-[-32px] md:mt-[-30px] absolute tracking-widest text-[#766554] bottom-0 left-8 lg:left-auto"
+                className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 md:text-base md:ml-[-32px] md:mt-[-30px] absolute tracking-widest bottom-0 left-8 lg:left-auto"
                 whileHover="hover"
                 variants={buttonHover}
               >
-                <span className="text-md sm:text-xl">{categories[2].name}</span>
+                <span className="text-md md:text-[21px] font-extralight">{categories[2].name}</span>
               </motion.button>
             </Link>
           </motion.div>
         )}
       </div>
       <div className="md:mt-14 flex flex-col md:flex-row w-full md:gap-12 lg:gap-0 px-10 xs:px-6 sm:px-14 lg:px-6">
-        <div className="w-full md:w-1/2 lg:w-2/5 flex flex-col xs:flex-row md:flex-col gap-6 lg:gap-10 items-start xl:px-10">
+        <div className="w-full md:w-1/2 lg:w-2/6 flex flex-col xs:flex-row md:flex-col gap-6 lg:gap-10 items-start xl:px-10">
           {categories?.length > 0 && (
             <motion.div
               className="w-full lg:w-auto text-center md:text-left relative"
@@ -89,8 +78,8 @@ export default function OurProducts() {
               whileInView="onscreen"
               variants={slideIn}
             >
-              <Link href="/diningtable">
-                <div className="w-full lg:w-[350px] aspect-[4/3] lg:aspect-[7/6]  relative">
+              <Link href="/chair">
+                <div className="w-full md:w-[350px] md:h-[350px] lg:w-[300px] lg:h-[300px] xl:w-[320px] xl:h-[320px] aspect-[4/3] lg:aspect-[7/6] relative">
                   <Image
                     src={getImageUrl(categories[0]?.images[0])}
                     fill
@@ -99,11 +88,11 @@ export default function OurProducts() {
                   />
                 </div>
                 <motion.button
-                  className="bg-white border border-[#766554] px-1 sm:px-2 sm:py-1 md:text-base absolute bottom-[0px] lg:bottom-[-14px] xl:right-[-50px] tracking-widest text-[#766554] left-0 lg:left-auto"
+                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 md:text-base absolute bottom-[0px] lg:bottom-[10px] lg:right-[-35px] xl:right-[-45px] tracking-widest left-0 lg:left-auto"
                   whileHover="hover"
                   variants={buttonHover}
                 >
-                  <span className="text-md md:text-xl">{categories[0].name}</span>
+                  <span className="text-md md:text-[21px] font-extralight">{categories[0].name}</span>
                 </motion.button>
               </Link>
             </motion.div>
@@ -111,13 +100,13 @@ export default function OurProducts() {
 
           {categories?.length > 1 && (
             <motion.div
-              className="w-full lg:w-auto relative"
+              className="w-full relative md:flex lg:justify-end"
               initial="offscreen"
               whileInView="onscreen"
               variants={slideIn}
             >
               <Link href="/stool" className="text-end">
-                <div className="xl:ml-8 w-full lg:w-[380px] xl:w-[400px] aspect-[4/3] relative">
+                <div className="w-full md:w-[350px] md:h-[350px] lg:w-[300px] lg:h-[300px] xl:w-[320px] xl:h-[320px] aspect-[4/3] relative">
                   <Image
                     src={getImageUrl(categories[1]?.images[0])}
                     fill
@@ -126,27 +115,27 @@ export default function OurProducts() {
                   />
                 </div>
                 <motion.button
-                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 absolute bottom-0 lg:bottom-[20px] lg:right-[-50px] tracking-widest text-[#766554]"
+                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 absolute bottom-0 lg:bottom-[10px] left-0 lg:left-[15px] xl:left-[10px] tracking-widest"
                   whileHover="hover"
                   variants={buttonHover}
                 >
-                  <span className="text-md md:text-xl">{categories[1].name}</span>
+                  <span className="text-md md:text-[21px] font-extralight">{categories[1].name}</span>
                 </motion.button>
               </Link>
             </motion.div>
           )}
         </div>
 
-        <div className="w-full block md:hidden relative lg:block lg:w-1/5 mt-3 md:mt-0 mb-5 md:mb-0 md:px-0">
+        <div className="w-full block md:hidden relative lg:flex justify-center items-center lg:w-2/6 mt-6 md:mt-0 mb-5 md:mb-0 md:px-0">
           {categories?.length > 2 && (
             <motion.div
-              className="text-center relative md:mt-20"
+              className="w-full text-center relative mb-4"
               initial="offscreen"
               whileInView="onscreen"
               variants={slideUp}
             >
-              <Link href="/chair" className="flex justify-center">
-                <div className="w-full xs:w-[50%] md:w-full aspect-[4/3] lg:aspect-[3/3.5] relative">
+              <Link href="/diningtable" className="flex justify-center">
+                <div className="w-full xs:w-[50%] lg:w-[300px] lg:h-[300px] xl:w-[350px] xl:h-[350px] aspect-[4/3] lg:aspect-[3/3.5] relative">
                   <Image
                     src={getImageUrl(categories[2]?.images[0])}
                     fill
@@ -155,27 +144,27 @@ export default function OurProducts() {
                   />
                 </div>
                 <motion.button
-                  className="bg-white border border-[#766554] px-2 sm:py-1 md:text-base bottom-0 md:bottom-[-10px] absolute tracking-widest text-[#766554] left-0 xs:left-auto"
+                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 md:text-base bottom-0 lg:bottom-[-10px] absolute tracking-widest left-0 xs:left-auto"
                   whileHover="hover"
                   variants={buttonHover}
                 >
-                  <span className="text-md md:text-xl">{categories[2].name}</span>
+                  <span className="text-md md:text-[21px] font-extralight">{categories[2].name}</span>
                 </motion.button>
               </Link>
             </motion.div>
           )}
         </div>
 
-        <div className="w-full md:w-1/2 lg:w-2/5 flex flex-col xs:flex-row md:flex-col gap-6 lg:gap-10 xl:px-10 items-end">
+        <div className="w-full md:w-1/2 lg:w-2/6 flex flex-col xs:flex-row md:flex-col gap-6 lg:gap-10 xl:px-10 items-end">
           {categories?.length > 3 && (
             <motion.div
-              className="w-full lg:w-auto text-center relative md:right-0"
+              className="w-full lg:w-auto relative md:flex justify-end"
               initial="offscreen"
               whileInView="onscreen"
               variants={slideInRight}
             >
               <Link href="/coffeetable">
-                <div className="w-full lg:w-[330px] aspect-[4/3] lg:aspect-[11/10]  relative">
+                <div className="w-full md:w-[350px] md:h-[350px] lg:w-[300px] lg:h-[300px] xl:w-[320px] xl:h-[320px] aspect-[4/3] lg:aspect-[11/10] relative">
                   <Image
                     src={getImageUrl(categories[3]?.images[0])}
                     fill
@@ -184,11 +173,11 @@ export default function OurProducts() {
                   />
                 </div>
                 <motion.button
-                  className="bg-white border border-[#766554] px-2 sm:py-1 absolute bottom-[0px] lg:bottom-[-10px] left-0 lg:left-[-25px] tracking-widest text-[#766554]"
+                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 absolute bottom-[0px] lg:bottom-[10px] lg:left-[-35px] xl:left-[-75px] tracking-widest"
                   whileHover="hover"
                   variants={buttonHover}
                 >
-                  <span className="text-md md:text-xl">{categories[3].name}</span>
+                  <span className="text-md md:text-[21px] font-extralight">{categories[3].name}</span>
                 </motion.button>
               </Link>
             </motion.div>
@@ -196,13 +185,13 @@ export default function OurProducts() {
 
           {categories?.length > 4 && (
             <motion.div
-              className="w-full lg:w-auto relative"
+              className="w-full relative md:flex justify-end lg:justify-start"
               initial="offscreen"
               whileInView="onscreen"
               variants={slideInRight}
             >
               <Link href="/diningtableleg">
-                <div className="xl:mr-8 w-full lg:w-[380px] xl:w-[400px] aspect-[4/3] relative">
+                <div className="xl:mr-8 w-full md:w-[350px] md:h-[350px] lg:w-[300px] lg:h-[300px] xl:w-[320px] xl:h-[320px] aspect-[4/3] relative">
                   <Image
                     src={getImageUrl(categories[4]?.images[0])}
                     fill
@@ -211,11 +200,11 @@ export default function OurProducts() {
                   />
                 </div>
                 <motion.button
-                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 absolute bottom-[0px] lg:bottom-[20px] lg:left-[-50px] tracking-widest text-[#766554]"
+                  className="bg-white border border-[#766554] px-2 sm:px-4 sm:py-1 absolute bottom-[0px] lg:bottom-[10px] lg:right-[-20px] tracking-widest"
                   whileHover="hover"
                   variants={buttonHover}
                 >
-                  <span className="text-md md:text-xl">{categories[4].name}</span>
+                  <span className="text-md md:text-[21px] font-extralight">{categories[4].name}</span>
                 </motion.button>
               </Link>
             </motion.div>
