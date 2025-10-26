@@ -113,10 +113,10 @@ export default function DiningTableContent({ productData, categories }) {
   return (
     <div className="w-full pb-4 h-auto overflow-x-hidden font-raleway">
       <div className="2xl:container my-5 mx-auto px-4 sm:px-16">
-        <div className="flex flex-wrap mt-3 items-center">
-          <div className="w-full xs:w-6/12 sm:w-7/12 flex flex-col justify-center mb-4 xs:mb-0">
+        <div className="relative flex mt-3 items-center">
+          <div className="w-7/12 flex flex-col justify-center mb-4 xs:mb-0">
             <motion.div
-              className="flex justify-center font-normal md:font-light text-2xl sm:text-3xl md:text-4xl lg:text-[48px] tracking-wide sm:tracking-[12px] md:tracking-[14px] lg:mb-3"
+              className="flex justify-center font-normal lg:font-light text-[18px] xs:text-[20px] sm:text-2xl lg:text-[48px] tracking-[7px] sm:tracking-[10px] md:tracking-[14px] lg:mb-3"
               initial="offscreen"
               whileInView="onscreen"
               variants={headVariants}
@@ -124,7 +124,7 @@ export default function DiningTableContent({ productData, categories }) {
               {categoryData[0]?.name}
             </motion.div>
             <motion.p
-              className="text-center font-extralight text-xs sm:text-base md:text-[18px] mt-2 sm:mt-4 sm:px-2 md:px-8 lg:px-20 tracking-[1.88px] md:tracking-[2.2px] capitalize leading-[1.7]"
+              className="hidden text-center font-extralight md:flex md:text-sm lg:text-[18px] mt-2 sm:mt-4 sm:px-2 md:px-8 lg:px-6 tracking-[1.88px] md:tracking-[2.2px] capitalize leading-[1.7]"
               initial="offscreen"
               whileInView="onscreen"
               variants={togVariants}
@@ -134,18 +134,20 @@ export default function DiningTableContent({ productData, categories }) {
               elements, harmoniously merging sophistication and practicality.
             </motion.p>
           </div>
+          <div className="w-5/12 aspect-[1.4657] invisible" />
           <motion.div
-            className="w-full xs:w-6/12 sm:w-5/12 flex items-center justify-center lg:justify-end -z-10"
+            className="absolute right-0 w-6/12 flex items-center justify-center lg:justify-end -z-10"
             initial="offscreen"
             whileInView="onscreen"
             variants={slideInRight}
           >
-            <div className="relative w-[80%] xs:w-[100%] sm:w-[80%] aspect-[4/3] border-ridge lg:ml-10">
-              <div className="absolute inset-y-0 left-0 z-10 pointer-events-none xs:shadow-[0px_0px_25px_30px_white] md:shadow-[0px_0px_38px_48px_white] lg:shadow-[0px_0px_50px_65px_white]" />
+            <div className="relative w-[80%] xs:w-[100%] aspect-[1.7657] border-ridge">
+              {/* <div className="absolute inset-y-0 left-0 z-10 pointer-events-none xs:shadow-[0px_0px_25px_30px_white] md:shadow-[0px_0px_38px_48px_white] lg:shadow-[0px_0px_50px_65px_white]" /> */}
 
               {/* Image */}
               <Image
-                src={getImage(categoryData[0]?.images[0])}
+                // src={getImage(categoryData[0]?.images[0])}
+                src={`/dind.jpg`}
                 alt="Dining Table"
                 fill
                 className="object-cover"

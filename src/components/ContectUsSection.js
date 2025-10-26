@@ -39,7 +39,7 @@ export default function ContactUsSection() {
         </motion.div>
 
         <motion.div
-          className="flex flex-col w-5/12 md:w-5/12 pl-12 xs:pl-10 sm:pl-12 lg:pl-28"
+          className="flex flex-col w-5/12 md:w-5/12 pl-6 sm:pl-12 lg:pl-28"
           initial="offscreen"
           whileInView="onscreen"
           variants={togVariants}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoBagOutline } from 'react-icons/io5';
 import toast from "react-hot-toast";
+import { RiArrowDownWideFill, RiArrowUpWideFill } from "react-icons/ri";
 
 export default function ProductDetail({ product, edges, tops, finishes }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -135,12 +136,12 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
             <button
               onClick={prevSlide}
               disabled={currentSlide === 0}
-              className={`rotate-90 z-10 h-7 w-7 bg-white p-1 rounded-full shadow-md ${currentSlide === 0
-                ? "opacity-70 cursor-not-allowed"
+              className={`z-10 h-7 w-8 bg-[#EFEFEF80] flex justify-center items-center p-1 rounded-full shadow-md ${currentSlide === 0
+                ? "cursor-not-allowed"
                 : "cursor-pointer"
                 }`}
             >
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 viewBox="0 0 20 20"
@@ -151,7 +152,8 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                   d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                   clipRule="evenodd"
                 />
-              </svg>
+              </svg> */}
+              <RiArrowUpWideFill />
             </button>
 
             <div className="flex md:flex-col gap-8 overflow-hidden"
@@ -160,7 +162,7 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
               {filteredImages
                 .slice(currentSlide, currentSlide + 2)
                 .map((image, index) => (
-                  <div key={index} className="flex h-60 pr-4">
+                  <div key={index} className="flex h-60 pr-4 bg-[#EFEFEF80]">
                     <Image
                       key={index}
                       src={getImageUrl(image)}
@@ -177,12 +179,12 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
             <button
               onClick={nextSlide}
               disabled={currentSlide >= filteredImages.length - 2}
-              className={`h-7 w-7 md:rotate-90 z-10 bg-white p-1 rounded-full shadow-md ${currentSlide >= filteredImages.length - 2
-                ? "opacity-70 cursor-not-allowed"
+              className={`h-7 w-8 z-10 bg-[#EFEFEF80] flex justify-center items-center p-1 rounded-full shadow-md ${currentSlide >= filteredImages.length - 2
+                ? "cursor-not-allowed"
                 : "cursor-pointer"
                 }`}
             >
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 viewBox="0 0 20 20"
@@ -193,10 +195,12 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                   d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                   clipRule="evenodd"
                 />
-              </svg>
+              </svg> */}
+               <RiArrowDownWideFill />
+
             </button>
 
-            <div className="flex flex-col font-normal justify-center items-center text-[19px] xl:text-[22px]">
+            <div className="flex flex-col font-normal justify-center items-center text-[13px] lg:text-[19px] xl:text-[22px]">
               <div className="tracking-[4px] xl:tracking-[6px] mt-6">{product.length} x {product.width} x {product.height}.</div>
               <div className="tracking-[4px] xl:tracking-[6px] mt-4">CBM : {product.cbm}</div>
             </div>
@@ -212,7 +216,7 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
             <div className="flex relative">
               <div className="hidden md:block border-l-[2.58px] border-solid border-[#0000004D] relative top-[-9px] h-[103%]"></div>
               <div className="md:pl-8 flex-1 flex flex-col justify-center">
-                <div className="p-10 md:p-4 md:h-96 mt-10 md:mt-24 flex relative">
+                <div className="p-10 md:p-4 md:h-96 mt-10 md:mt-24 flex relative bg-[#EFEFEF80]">
                   <div className="absolute top-0 left-0 w-16 h-16 md:w-32 md:h-32">
                     <div className="absolute top-0 left-0 h-0.5 w-full bg-gradient-to-r from-gray-700 via-gray-300 to-gray-100"></div>
                     <div className="absolute top-0 left-0 w-0.5 h-full bg-gradient-to-b from-gray-700 via-gray-300 to-gray-100"></div>
@@ -236,16 +240,16 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
 
                 <div className="mt-16 hidden md:flex">
                   <div className="w-8/12 space-y-6">
-                    <div className="flex">
-                      <span className="text-[19px] xl:text-[23.21px] font-normal tracking-[4px] xl:tracking-[6px]">Material:</span>
-                      <span className="text-[19px] xl:text-[23.21px] tracking-[4px] xl:tracking-[6px] font-light pl-2">{product.topmaterial?.name}, {product.legmaterial?.name}</span>
+                    <div className="flex text-[15px] lg:text-[19px] xl:text-[23.21px] tracking-[4px] xl:tracking-[6px]">
+                      <span className="font-normal">Material:</span>
+                      <span className="font-light pl-2">{product.topmaterial?.name}, {product.legmaterial?.name}</span>
                     </div>
 
                     <div className="border-t-[1.29px] border-solid border-[#0000003D]"></div>
 
-                    <div className="flex">
-                      <span className="text-[19px] xl:text-[23.21px] font-normal tracking-[4px] xl:tracking-[6px]">Finish:</span>
-                      <span className="text-[19px] xl:text-[23.21px] tracking-[4px] xl:tracking-[6px] font-light pl-2">
+                    <div className="flex text-[15px] lg:text-[19px] xl:text-[23.21px] tracking-[4px] xl:tracking-[6px]">
+                      <span className="font-normal">Finish:</span>
+                      <span className="font-light pl-2">
                         {activeFilter?.type === 'finish'
                           ? activeFilter.name
                           : `${product.topfinish?.name}, ${product.legfinish?.name}`}
@@ -273,16 +277,16 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
             </div>
 
             <div className="flex md:hidden">
-              <div className="w-6/12 mt-4 space-y-4 flex flex-col md:hidden justify-center items-center">
+              <div className="w-6/12 mt-4 space-y-2 flex flex-col md:hidden justify-center items-center">
                 <button
                   onClick={prevSlide}
                   disabled={currentSlide === 0}
-                  className={`rotate-90 z-10 h-7 w-7 p-1 rounded-full ${currentSlide === 0
-                    ? "opacity-70 cursor-not-allowed"
+                  className={`z-10 h-5 w-6 sm:h-7 sm:w-8 bg-[#EFEFEF80] flex justify-center items-center p-1 rounded-full ${currentSlide === 0
+                    ? "cursor-not-allowed"
                     : "cursor-pointer"
                     }`}
                 >
-                  <svg
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
                     viewBox="0 0 20 20"
@@ -293,7 +297,9 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                       d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
                       clipRule="evenodd"
                     />
-                  </svg>
+                  </svg> */}
+                  <RiArrowUpWideFill />
+
                 </button>
 
                 <div className="flex flex-col gap-8 overflow-hidden"
@@ -302,7 +308,7 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                   {filteredImages
                     .slice(currentSlide, currentSlide + 2)
                     .map((image, index) => (
-                      <div key={index} className="flex">
+                      <div key={index} className="flex bg-[#EFEFEF80] p-3">
                         <Image
                           key={index}
                           src={getImageUrl(image)}
@@ -319,12 +325,12 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                 <button
                   onClick={nextSlide}
                   disabled={currentSlide >= filteredImages.length - 2}
-                  className={`h-7 w-7 rotate-90 z-10 p-1 rounded-full ${currentSlide >= filteredImages.length - 2
-                    ? "opacity-70 cursor-not-allowed"
+                  className={`h-5 w-6 sm:h-7 sm:w-8 z-10 bg-[#EFEFEF80] flex justify-center items-center p-1 rounded-full ${currentSlide >= filteredImages.length - 2
+                    ? "cursor-not-allowed"
                     : "cursor-pointer"
                     }`}
                 >
-                  <svg
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
                     viewBox="0 0 20 20"
@@ -335,11 +341,13 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                       d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                       clipRule="evenodd"
                     />
-                  </svg>
+                  </svg> */}
+                  <RiArrowDownWideFill />
+
                 </button>
               </div>
-              <div className="mt-20 ml-6 w-full">
-                <div className="w-full space-y-6">
+              <div className="mt-16 xs:mt-20 ml-6 w-full">
+                <div className="w-full space-y-7 xs:space-y-12">
                   <div className="flex">
                     <span className="text-[10px] font-normal tracking-[4px]">Material:</span>
                     <span className="text-[10px] tracking-[4px] font-light pl-2">{product.topmaterial?.name}, {product.legmaterial?.name}</span>
@@ -354,7 +362,7 @@ export default function ProductDetail({ product, edges, tops, finishes }) {
                     </span>
                   </div>
                 </div>
-                <div className="w-full flex flex-col xs:flex-row items-center xs:items-normal gap-2 xs:gap-0 justify-between mt-8">
+                <div className="w-full flex flex-col xs:flex-row items-center xs:items-normal gap-2 xs:gap-0 justify-between mt-7 xs:mt-14">
                   <div className="tracking-[4px] text-[11px] font-light mt-6">CBM : {product.cbm}</div>
                   <div className="flex justify-end items-center relative">
                     {isInQuery ? (
