@@ -149,3 +149,24 @@ export const letterVariants = {
     transition: { duration: 0.6 },
   },
 };
+
+
+export  const fadeVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1, ease: "easeInOut" } },
+    exit: { opacity: 0, transition: { duration: 1, ease: "easeInOut" } },
+  };
+
+export  const textUpVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: "easeOut",
+        delay: 0.3, // delay to match image fade-in if needed
+      },
+    },
+    exit: { opacity: 0, y: 40, transition: { duration: 1, ease: "easeInOut" } },
+  };

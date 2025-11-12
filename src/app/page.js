@@ -20,7 +20,7 @@ export default async function Home() {
   const categories = categoriesList?.categoryList
 
   return (
-    <div className=" 2xl:container 2xl:mx-auto overflow-x-hidden">
+    <div className="3xl:container 3xl:mx-auto overflow-x-hidden">
 
       <Homepage homepageImg={homepageImg} mobilepageImg={mobilepageImg} />
 

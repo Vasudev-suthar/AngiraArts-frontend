@@ -98,20 +98,21 @@ export default function Homepage({ homepageImg, mobilepageImg }) {
                 height={196}
                 alt="Logo"
                 className="hidden lg:block"
+                // className="hidden lg:block brightness-75"
               />
               <Image
                 src="/logo.png"
                 width={122}
                 height={121}
                 alt="Logo"
-                className=" hidden md:block lg:hidden"
+                className="hidden md:block lg:hidden"
               />
               <Image
                 src="/logo.png"
                 width={82}
                 height={81}
                 alt="Logo"
-                className=" block md:hidden"
+                className="block md:hidden"
               />
             </div>
 
@@ -343,19 +344,19 @@ export default function Homepage({ homepageImg, mobilepageImg }) {
         <div className="relative z-10 flex flex-col items-center justify-between mt-24 h-[380px] w-[290px]">
           {/* ---- Borders ---- */}
           {/* Top border */}
-          <div className="absolute top-[18px] -right-[30px] w-[30px] h-0 border-t-4 border-white"></div>
+          {/* <div className="absolute top-[18px] -right-[30px] w-[30px] h-0 border-t-4 border-white"></div> */}
 
           {/* Left border */}
-          <div className="absolute top-[18px] -right-[30px] h-[420px] w-0 border-l-4 border-white"></div>
+          {/* <div className="absolute top-[18px] -right-[30px] h-[420px] w-0 border-l-4 border-white"></div> */}
 
           {/* Right border (split into top, middle gaps, and bottom) */}
-          <div className="absolute top-[50px] left-[15px] h-[60px] w-0 border-r-4 border-white"></div>
+          {/* <div className="absolute top-[50px] left-[15px] h-[60px] w-0 border-r-4 border-white"></div>
           <div className="absolute top-[160px] left-[15px] h-[60px] w-0 border-r-4 border-white"></div>
           <div className="absolute top-[270px] left-[15px] h-[60px] w-0 border-r-4 border-white"></div>
-          <div className="absolute -bottom-[60px] left-[15px] h-[60px] w-0 border-r-4 border-white"></div>
+          <div className="absolute -bottom-[60px] left-[15px] h-[60px] w-0 border-r-4 border-white"></div> */}
 
           {/* Bottom border */}
-          <div className="absolute -bottom-[60px] left-[15px] w-[305px] h-0 border-b-4 border-white"></div>
+          {/* <div className="absolute -bottom-[60px] left-[15px] w-[305px] h-0 border-b-4 border-white"></div> */}
 
           <div className="absolute -bottom-[100px] -right-[30px] flex gap-3">
               <a target="_blank" rel="noopener noreferrer">

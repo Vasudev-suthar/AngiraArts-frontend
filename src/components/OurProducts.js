@@ -18,7 +18,7 @@ export default function OurProducts({ categories }) {
     image ? `${imageBaseUrl}${image}` : "/placeholder.jpg";
 
   return (
-    <div className="block relative bg-white pb-8 2xl:container 2xl:mx-auto overflow-x-hidden font-raleway">
+    <div className="block relative bg-white pb-8 3xl:container 2xl:mx-auto overflow-x-hidden font-raleway">
       {/* Title */}
       <div className="flex justify-center items-center bg-[#F4F3F0] h-10 sm:h-20 mt-4 md:mt-8 w-44 sm:w-[360px] lg:w-[459px]">
         <motion.p
@@ -94,7 +94,7 @@ export default function OurProducts({ categories }) {
                   />
                 </div>
                 <motion.button
-                  className="bg-white border border-[#766554] px-4 py-1 absolute lg:bottom-[10px] left-0 lg:left-[15px] xl:left-[10px] tracking-widest"
+                  className="bg-white border border-[#766554] px-4 py-1 absolute lg:bottom-[10px] left-0 lg:left-[15px] xl:left-[10px] 2xl:left-[30px] tracking-widest"
                   whileHover="hover"
                   variants={buttonHover}
                 >
